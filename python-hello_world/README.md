@@ -1,1 +1,2 @@
-s is a readme file
+#!/usr/bin/python3
+This is a readme file
