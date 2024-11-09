@@ -1,38 +1,18 @@
 #!/usr/bin/python3
-"""Module: 8-rectangle
-This is a rectangle class that inherit the BaseGeometry from the BaseGeometry class
+"""
+Contains the class BaseGeometry and subclass Rectangle
 """
 
 
-BaseGeometry = __import__('7-base_geometry').BaseGeometry
-
-
-class Rectangle(BaseGeometry):
-    """This is a rectangle class
-    It has the following private attribute:
-        width = __width
-        height = __height
-    It inherits the integer validator from the BaseGeometry class
-    """
-
-    def __init__(self, width, height):
-        """Validates the following attributes:
-            - width
-            - height
-        """
-
-
-        self.integer_validator("width", width)
-        self.integer_validator("height", height)
-        self.__width = width
-        self.__height = height
-
-    def __str__(self):
-        """Returns a format string of the attribute width and height"""
-
-        return str("[Rectangle] {}/{}".format(self.__width, self.__height))
-
+class BaseGeometry:
+    """A class with public instance methods area and integer_validator"""
     def area(self):
-        """Returns the area of both attribute"""
+        """raises an exception when called"""
+        raise Exception("area() is not implemented")
 
-        return self.__width * self.__height
+    def integer_validator(self, name, value):
+        """validates that value is an integer greater than 0"""
+        if type(value) is not int:
+            raise TypeError("{:s} must be an integer".format(name))
+        if value <= 0:
+            raise ValueError("{:s} must be greater than 0".format(name))
