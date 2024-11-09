@@ -1,17 +1,16 @@
 #!/usr/bin/python3
 """
-Module: 0-lookup
-Find returns the list of available attributes and methods of an object
+This module defines a function `lookup` that returns a list of all available
+attributes and methods of an object using the built-in `dir()` function.
 """
 
 
 def lookup(obj):
     """
-    Function that returns the list of available attributes and methods of an object
-    
-    Args: 
-        - obj is the object to look into
+    Returns a list of available attrib and methods of an obj.
+    Args:
+        obj:obj whose attributes and methods are to be retrieved.
+    Returns:
+        A list of the object's attributes and methods.
     """
-
     return dir(obj)
-
