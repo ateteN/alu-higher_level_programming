@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Write a script that lists all states from the database hbtn_0e_0_usa
+Lists all cities of a particular state
 """
 import MySQLdb
 import sys
@@ -10,6 +10,8 @@ if __name__ == '__main__':
     con = MySQLdb.connect(db=sys.argv[3], user=sys.argv[1], passwd=sys.argv[2])
     with con.cursor() as cur:
         """Used context manager to automatically close the cursor object"""
-        cur.execute('SELECT * FROM states ORDER BY states.id;')
-        [print(row) for row in cur.fetchall()]
+        cur.execute('''SELECT cities.name FROM cities JOIN states ON
+                    states.id=cities.state_id
+                    WHERE states.name = %s;''', (sys.argv[4], ))
+        print(", ".join([row[0] for row in cur.fetchall()]))
     con.close()
