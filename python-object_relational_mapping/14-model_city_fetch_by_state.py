@@ -2,6 +2,7 @@
 """List all states"""
 from sys import argv
 from model_state import Base, State
+from model_city import City
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker
 
@@ -13,8 +14,9 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    states = session.query(State).filter(State.name.like('%a%')).all()
-    for state in states:
-        session.delete(state)
+    results = session.query(City, State).\
+        filter(City.state_id == State.id).all()
+    for city, state in results:
+        print("{}: ({}) {}".format(state.name, city.id, city.name))
     session.commit()
     session.close()
